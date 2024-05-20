@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """ Pagination """
+
 import csv
 from typing import List
+
 index_range = __import__('0-simple_helper_function').index_range
 
 
@@ -37,6 +39,7 @@ class Server:
 
 
 if __name__ == "__main__":
+    """ Test cases """
     server = Server()
 
     try:
