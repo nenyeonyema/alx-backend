@@ -2,6 +2,7 @@
 """ Pagination """
 
 import csv
+import math
 from typing import List
 
 index_range = __import__('0-simple_helper_function').index_range
@@ -36,6 +37,7 @@ class Server:
             return []
 
         return dataset[start_index:end_index]
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Returns a dictionary with pagination information."""
         data = self.get_page(page, page_size)
