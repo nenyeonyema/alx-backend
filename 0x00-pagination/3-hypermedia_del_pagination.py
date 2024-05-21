@@ -2,7 +2,7 @@
 """ Pagination """
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 index_range = __import__('0-simple_helper_function').index_range
 
@@ -14,6 +14,7 @@ class Server:
     def __init__(self):
         """ Object constructor"""
         self.__dataset = None
+        self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
         """Cached dataset"""
@@ -53,6 +54,37 @@ class Server:
             'next_page': next_page,
             'prev_page': prev_page,
             'total_pages': total_pages
+        }
+    
+    def indexed_dataset(self) -> Dict[int, List]:
+        """Dataset indexed by sorting position, starting at 0"""
+        if self.__indexed_dataset is None:
+            dataset = self.dataset()
+            self.__indexed_dataset = {
+                i: dataset[i] for i in range(len(dataset))
+            }
+        return self.__indexed_dataset
+
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """Returns a dictionary with pagination information."""
+        assert index is not None and index >= 0 and index < len(self.indexed_dataset()), "index must be in valid range"
+
+        indexed_dataset = self.indexed_dataset()
+        data = []
+        next_index = index
+
+        for _ in range(page_size):
+            while next_index not in indexed_dataset and next_index < len(self.indexed_dataset()):
+                next_index += 1
+            if next_index in indexed_dataset:
+                data.append(indexed_dataset[next_index])
+            next_index += 1
+
+        return {
+            'index': index,
+            'data': data,
+            'page_size': len(data),
+            'next_index': next_index if next_index < len(self.indexed_dataset()) else None
         }
 
 
