@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """ Pagination """
+
 import csv
 import math
-from typing import List, Dict
+from typing import List, Dict, Tuple, Dict, Any
 
 index_range = __import__('0-simple_helper_function').index_range
 

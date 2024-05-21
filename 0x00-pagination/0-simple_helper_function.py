@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Pagination """
 
+
 def index_range(page: int, page_size: int) -> tuple:
     """
      returns a tuple of size two containing
