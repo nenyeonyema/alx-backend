@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""LIFO """
+""" LIFO """
 from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """ LIFOCache """
+    """ LIFO Caching """
     def __init__(self):
         """ Initialize the class """
         super().__init__()
@@ -24,7 +24,7 @@ class LIFOCache(BaseCaching):
         # If the key is already in the cache, we need to remove it from the stack
         if key in self.cache_data:
             self.stack.remove(key)
-        
+
         # Add the key to the stack and update the cache
         self.stack.append(key)
         self.cache_data[key] = item
