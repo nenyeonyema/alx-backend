@@ -17,7 +17,7 @@ class FIFOCache(BaseCaching):
         if key not in self.cache_data and len_item >= BaseCaching.MAX_ITEMS:
             first_in = self.order.pop(0)
             del self.cache_data[first_in]
-            print(f"DISCARD {first_in}")
+            print(f"DISCARD: {first_in}")
 
         if key not in self.order:
             self.order.append(key)
@@ -27,4 +27,3 @@ class FIFOCache(BaseCaching):
         if key is None or key not in self.cache_data:
             return None
         return self.cache_data[key]
-
