@@ -28,7 +28,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """ Parameterizes the template """
     home_title = _("home_title")
     home_header = _("home_header")
