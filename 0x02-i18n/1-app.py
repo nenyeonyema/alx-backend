@@ -17,7 +17,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-@app_route('/')
+@app.route('/')
 def index():
     """ Renders a html page """
     return render_template('1-index.html')
