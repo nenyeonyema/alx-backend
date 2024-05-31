@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Flask Babel """
 from flask import Flask, render_template
-from flask_bbabel import Babel
+from flask_babel import Babel
 
 
 class Config:
@@ -18,7 +18,7 @@ babel = Babel(app)
 
 
 @app.route('/')
-def index():
+def index()-> str:
     """ Renders a html page """
     return render_template('1-index.html')
 
