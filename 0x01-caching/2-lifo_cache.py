@@ -1,36 +1,45 @@
 #!/usr/bin/env python3
-""" LIFO """
+""" LIFOCache module """
 from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """ LIFO Caching """
+    """ LIFOCache class inherits from BaseCaching and is a caching system """
+
     def __init__(self):
-        """ Initialize the class """
+        """ Initialize the LIFO cache """
         super().__init__()
-        self.stack = []
+        self.order = []
 
     def put(self, key, item):
-        """ Add an item in the cache """
+        """
+        Assign to the dictionary self.cache_data the item value
+        for the key key.
+        If key or item is None, this method should not do anything.
+        If the number of items in self.cache_data is higher
+        than BaseCaching.MAX_ITEMS:
+        must discard the last item put in cache (LIFO algorithm).
+        must print DISCARD: with the key discarded and following by a new line.
+        """
         if key is None or item is None:
             return
 
-        if key not in self.cache_data and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            # LIFO: remove the last item added (most recently added item)
-            last_key = self.stack.pop()
+        if (key not in self.cache_data and
+                len(self.cache_data) >= BaseCaching.MAX_ITEMS):
+            last_key = self.order.pop()
             del self.cache_data[last_key]
-            print(f"DISCARD: {last_key}")
+            print("DISCARD: {}".format(last_key))
 
-        # If the key is already in the cache, we need to remove it from the stack
         if key in self.cache_data:
-            self.stack.remove(key)
+            self.order.remove(key)
 
-        # Add the key to the stack and update the cache
-        self.stack.append(key)
         self.cache_data[key] = item
+        self.order.append(key)
 
     def get(self, key):
-        """ Get an item by key """
-        if key is None or key not in self.cache_data:
-            return None
-        return self.cache_data[key]
+        """
+        Return the value in self.cache_data linked to key.
+        If key is None or if the key doesn’t exist in self.cache_data,
+        return None.
+        """
+        return self.cache_data.get(key, None)
